@@ -11,10 +11,8 @@ export function renderOrderSummary(){
 
   const deliveryDate = today.add(2, "day").format("dddd, MMMM D");
 
-  console.log(deliveryDate);
 
   cart.forEach((item) => {
-    console.log("Cart item:", item);
     const productId = item.productId;
     const product = products.find((product) => product.id === productId);
     const deliveryOptionId = item.deliveryOptionId;
