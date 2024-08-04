@@ -38,7 +38,6 @@ function saveToStorage() {
 
 // Add an item to the cart
 export function addToCart(productId) {
-  let matchingItem;
 
   const addedButton = document.querySelector(`.js-added-to-cart-${productId}`);
   if (addedButton) {
@@ -57,7 +56,7 @@ export function addToCart(productId) {
   }
 
   const quantity = Number(quantitySelector.value);
-
+  let matchingItem;
   cart.forEach((item) => {
     if (item.productId === productId) {
       matchingItem = item;
@@ -93,5 +92,18 @@ export function updateQuantity(productId, quantity) {
     return item; // Return item to ensure array is updated
     
   });
+  saveToStorage();
+}
+
+export function updateDeliveryOption(productId, deliveryOptionId){
+  let matchingItem;
+  cart.forEach((item) => {
+    if (item.productId === productId) {
+      matchingItem = item;
+    }
+  });
+
+  matchingItem.deliveryOptionId = deliveryOptionId;
+
   saveToStorage();
 }
