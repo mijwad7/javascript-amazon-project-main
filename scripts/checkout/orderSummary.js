@@ -2,6 +2,7 @@ import { cart, removeFromCart, updateQuantity, updateDeliveryOption } from "../.
 import { products } from "../../data/products.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 export function renderOrderSummary(){
 
@@ -125,6 +126,7 @@ export function renderOrderSummary(){
       } else {
         console.error(`.js-cart-item-container-${productId} not found.`);
       }
+      renderPaymentSummary();
     });
   });
 
@@ -179,6 +181,7 @@ export function renderOrderSummary(){
       quantityLabel.textContent = newQuantity;
 
       updateQuantity(productId, newQuantity);
+      renderPaymentSummary();
     });
   });
 
@@ -189,6 +192,7 @@ export function renderOrderSummary(){
 
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
     })
   })
 

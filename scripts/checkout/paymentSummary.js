@@ -7,7 +7,6 @@ export function renderPaymentSummary() {
   let deliveryTotal = 0;
   cart.forEach((cartItem) => {
     const productId = cartItem.productId;
-    console.log(productId);
     const product = products.find((product) => product.id === productId);
     productPriceCents += product.priceCents * cartItem.quantity;
 
@@ -17,6 +16,10 @@ export function renderPaymentSummary() {
     );
     deliveryTotal += deliveryOption.priceCents;
   });
+
+  const totalQuantity = cart.reduce((accumulator, currentItem) => {
+    return accumulator + currentItem.quantity;
+  }, 0);
 
   const totalBeforeTax = productPriceCents + deliveryTotal;
   const taxCents = totalBeforeTax * 0.1;
@@ -30,7 +33,7 @@ export function renderPaymentSummary() {
     </div>
 
     <div class="payment-summary-row">
-        <div>Items (3):</div>
+        <div>Items (${totalQuantity}):</div>
         <div class="payment-summary-money">$${(productPriceCents / 100).toFixed(2)}</div>
     </div>
 
@@ -60,4 +63,4 @@ export function renderPaymentSummary() {
   `;
 
   document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHTML;
-}
+} 
